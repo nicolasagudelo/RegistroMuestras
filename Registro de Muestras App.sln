@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Registro de Muestras App", "Registro de Muestras App\Registro de Muestras App.vbproj", "{8230C4D3-89A3-4FCA-82F6-EF4D86B8DDB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8230C4D3-89A3-4FCA-82F6-EF4D86B8DDB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8230C4D3-89A3-4FCA-82F6-EF4D86B8DDB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8230C4D3-89A3-4FCA-82F6-EF4D86B8DDB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8230C4D3-89A3-4FCA-82F6-EF4D86B8DDB9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {89E34804-3E1D-4666-959F-263D76186272}
+	EndGlobalSection
+EndGlobal
