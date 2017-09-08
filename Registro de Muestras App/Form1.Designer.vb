@@ -67,6 +67,7 @@ Partial Class MainForm
         '
         'BtnExportar
         '
+        Me.BtnExportar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnExportar.Location = New System.Drawing.Point(460, 19)
         Me.BtnExportar.Name = "BtnExportar"
         Me.BtnExportar.Size = New System.Drawing.Size(89, 23)
@@ -94,6 +95,7 @@ Partial Class MainForm
         '
         'LblCantidadMuestras
         '
+        Me.LblCantidadMuestras.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblCantidadMuestras.AutoSize = True
         Me.LblCantidadMuestras.Location = New System.Drawing.Point(275, 55)
         Me.LblCantidadMuestras.Name = "LblCantidadMuestras"
@@ -112,6 +114,7 @@ Partial Class MainForm
         '
         Me.TxtBxNumeroGuia.Location = New System.Drawing.Point(121, 55)
         Me.TxtBxNumeroGuia.Name = "TxtBxNumeroGuia"
+        Me.TxtBxNumeroGuia.ReadOnly = True
         Me.TxtBxNumeroGuia.Size = New System.Drawing.Size(131, 20)
         Me.TxtBxNumeroGuia.TabIndex = 8
         '
@@ -162,6 +165,7 @@ Partial Class MainForm
         Me.Controls.Add(Me.BtnNuevaGuia)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "MainForm"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Guias y Muestras"
         CType(Me.DGVRegistroMuestras, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
