@@ -12,3 +12,5 @@ C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\
 C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\obj\Debug\Registro de Muestras App.pdb
 C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\obj\Debug\Registro_de_Muestras_App.FormContraseña.resources
 C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\obj\Debug\Registro_de_Muestras_App.FormIngresoGuia.resources
+C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\bin\Debug\MySql.Data.dll
+C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\bin\Debug\MySql.Data.xml

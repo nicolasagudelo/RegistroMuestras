@@ -74,7 +74,6 @@ Partial Class FormContraseña
         Me.TxtBxUsuario.Location = New System.Drawing.Point(30, 41)
         Me.TxtBxUsuario.MaxLength = 32
         Me.TxtBxUsuario.Name = "TxtBxUsuario"
-        Me.TxtBxUsuario.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TxtBxUsuario.Size = New System.Drawing.Size(223, 20)
         Me.TxtBxUsuario.TabIndex = 1
         '

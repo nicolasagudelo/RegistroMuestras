@@ -35,6 +35,8 @@ Partial Class MainForm
         Me.TxtBxNumeroMuestra = New System.Windows.Forms.TextBox()
         Me.TxtBxNumeroGuia = New System.Windows.Forms.TextBox()
         Me.DGVRegistroMuestras = New System.Windows.Forms.DataGridView()
+        Me.TxBxUsuario = New System.Windows.Forms.TextBox()
+        Me.TxBxGuiaID = New System.Windows.Forms.TextBox()
         CType(Me.DGVRegistroMuestras, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -68,7 +70,7 @@ Partial Class MainForm
         'BtnExportar
         '
         Me.BtnExportar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnExportar.Location = New System.Drawing.Point(460, 19)
+        Me.BtnExportar.Location = New System.Drawing.Point(431, 19)
         Me.BtnExportar.Name = "BtnExportar"
         Me.BtnExportar.Size = New System.Drawing.Size(89, 23)
         Me.BtnExportar.TabIndex = 3
@@ -95,9 +97,10 @@ Partial Class MainForm
         '
         'LblCantidadMuestras
         '
-        Me.LblCantidadMuestras.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblCantidadMuestras.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblCantidadMuestras.AutoSize = True
-        Me.LblCantidadMuestras.Location = New System.Drawing.Point(275, 55)
+        Me.LblCantidadMuestras.Location = New System.Drawing.Point(258, 55)
         Me.LblCantidadMuestras.Name = "LblCantidadMuestras"
         Me.LblCantidadMuestras.Size = New System.Drawing.Size(112, 26)
         Me.LblCantidadMuestras.TabIndex = 6
@@ -105,6 +108,7 @@ Partial Class MainForm
         '
         'TxtBxNumeroMuestra
         '
+        Me.TxtBxNumeroMuestra.Enabled = False
         Me.TxtBxNumeroMuestra.Location = New System.Drawing.Point(121, 80)
         Me.TxtBxNumeroMuestra.Name = "TxtBxNumeroMuestra"
         Me.TxtBxNumeroMuestra.Size = New System.Drawing.Size(131, 20)
@@ -112,9 +116,9 @@ Partial Class MainForm
         '
         'TxtBxNumeroGuia
         '
+        Me.TxtBxNumeroGuia.Enabled = False
         Me.TxtBxNumeroGuia.Location = New System.Drawing.Point(121, 55)
         Me.TxtBxNumeroGuia.Name = "TxtBxNumeroGuia"
-        Me.TxtBxNumeroGuia.ReadOnly = True
         Me.TxtBxNumeroGuia.Size = New System.Drawing.Size(131, 20)
         Me.TxtBxNumeroGuia.TabIndex = 8
         '
@@ -125,7 +129,7 @@ Partial Class MainForm
         Me.DGVRegistroMuestras.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DGVRegistroMuestras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DGVRegistroMuestras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DGVRegistroMuestras.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DGVRegistroMuestras.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DGVRegistroMuestras.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -144,15 +148,37 @@ Partial Class MainForm
         Me.DGVRegistroMuestras.ImeMode = System.Windows.Forms.ImeMode.[On]
         Me.DGVRegistroMuestras.Location = New System.Drawing.Point(15, 122)
         Me.DGVRegistroMuestras.Name = "DGVRegistroMuestras"
-        Me.DGVRegistroMuestras.Size = New System.Drawing.Size(559, 471)
+        Me.DGVRegistroMuestras.Size = New System.Drawing.Size(530, 471)
         Me.DGVRegistroMuestras.TabIndex = 9
         Me.DGVRegistroMuestras.TabStop = False
+        '
+        'TxBxUsuario
+        '
+        Me.TxBxUsuario.Enabled = False
+        Me.TxBxUsuario.Location = New System.Drawing.Point(571, 48)
+        Me.TxBxUsuario.Name = "TxBxUsuario"
+        Me.TxBxUsuario.Size = New System.Drawing.Size(100, 20)
+        Me.TxBxUsuario.TabIndex = 10
+        Me.TxBxUsuario.TabStop = False
+        Me.TxBxUsuario.Visible = False
+        '
+        'TxBxGuiaID
+        '
+        Me.TxBxGuiaID.Enabled = False
+        Me.TxBxGuiaID.Location = New System.Drawing.Point(571, 74)
+        Me.TxBxGuiaID.Name = "TxBxGuiaID"
+        Me.TxBxGuiaID.Size = New System.Drawing.Size(100, 20)
+        Me.TxBxGuiaID.TabIndex = 13
+        Me.TxBxGuiaID.TabStop = False
+        Me.TxBxGuiaID.Visible = False
         '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(586, 605)
+        Me.ClientSize = New System.Drawing.Size(557, 605)
+        Me.Controls.Add(Me.TxBxGuiaID)
+        Me.Controls.Add(Me.TxBxUsuario)
         Me.Controls.Add(Me.DGVRegistroMuestras)
         Me.Controls.Add(Me.TxtBxNumeroGuia)
         Me.Controls.Add(Me.TxtBxNumeroMuestra)
@@ -164,6 +190,7 @@ Partial Class MainForm
         Me.Controls.Add(Me.BtnBuscarGuia)
         Me.Controls.Add(Me.BtnNuevaGuia)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MinimumSize = New System.Drawing.Size(573, 644)
         Me.Name = "MainForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Guias y Muestras"
@@ -183,4 +210,6 @@ Partial Class MainForm
     Friend WithEvents TxtBxNumeroMuestra As TextBox
     Friend WithEvents TxtBxNumeroGuia As TextBox
     Friend WithEvents DGVRegistroMuestras As DataGridView
+    Friend WithEvents TxBxUsuario As TextBox
+    Friend WithEvents TxBxGuiaID As TextBox
 End Class
