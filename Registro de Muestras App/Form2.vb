@@ -3,7 +3,6 @@ Imports System.Configuration
 
 Public Class FormContraseña
     Dim conn As New MySqlConnection
-
     Private Sub FormContraseña_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Connect()
         TxBxContraseña.Text = ""
@@ -18,6 +17,7 @@ Public Class FormContraseña
             Console.WriteLine("conectandose a la base de datos")
         Catch ex As Exception
             MsgBox(ex.Message)
+            End
         End Try
         conn.Close()
 
@@ -46,13 +46,14 @@ Public Class FormContraseña
         End If
 
         If contraseña = bd_password Then
-            MsgBox("Bienvenido " & usuario & "", False, "Log-In")
+            MsgBox("Bienvenida " & usuario & "", False, "Log-In")
             Dim usuario_id As String
             Try
                 conn.Open()
                 Dim cmd As New MySqlCommand(String.Format("Select UsuarioID from usuarios where usuario = '" & usuario & "';"), conn)
                 usuario_id = Convert.ToString(cmd.ExecuteScalar())
                 MainForm.TxBxUsuario.Text = usuario_id
+                MainForm.LabelUsuario.Text = "Sesion actual: " + usuario
                 conn.Close()
             Catch ex As Exception
                 MsgBox(ex.Message, False, "Error")
@@ -61,13 +62,11 @@ Public Class FormContraseña
             End Try
             Me.Hide()
             MainForm.ShowDialog()
-            Me.Close()
         Else
             MsgBox("Credenciales de inicio de sesion no validas")
             TxBxContraseña.Text = ""
             Exit Sub
         End If
-        Me.Close()
     End Sub
 
     Private Sub BtnCancelar_Click(sender As Object, e As EventArgs) Handles BtnCancelar.Click

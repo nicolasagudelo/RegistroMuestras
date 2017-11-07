@@ -2,10 +2,15 @@
 Imports System.Configuration
 
 Public Class MainForm
-
+    Implements IMessageFilter
     Dim conn As New MySqlConnection
-
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        DGVRegistroMuestras.DataSource = Nothing
+        TxtBxNumeroGuia.Enabled = False
+        TxtBxNumeroGuia.Text = ""
+        TxtBxNumeroMuestra.Enabled = False
+        TxtBxNumeroMuestra.Text = ""
+        LblCantidadMuestras.Text = "Cantidad de muestras" & vbCrLf & "en esta guia:"
         Connect()
     End Sub
 
@@ -20,6 +25,27 @@ Public Class MainForm
         End Try
         conn.Close()
 
+    End Sub
+
+    Public Sub New()
+        InitializeComponent()
+        Application.AddMessageFilter(Me)
+        Timer1.Enabled = True
+    End Sub
+
+    Public Function PreFilterMessage(ByRef m As Message) As Boolean Implements IMessageFilter.PreFilterMessage
+        'Reinicio del timer cuando se detecta uso del teclado o mouse
+        If (m.Msg >= &H100 And m.Msg <= &H109) Or (m.Msg >= &H200 And m.Msg <= &H20E) Then
+            Timer1.Stop()
+            Timer1.Start()
+        End If
+        Return Nothing
+    End Function
+
+    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+        Timer1.Stop()
+        MsgBox("5 minutos de inactividad cerrando sesion activa", False, "Alerta por inactividad")
+        BtnDesconectar.PerformClick()
     End Sub
 
     Private Sub CargarDGV(llave)
@@ -57,6 +83,7 @@ Public Class MainForm
         TxtBxNumeroGuia.Enabled = True
         TxtBxNumeroGuia.ReadOnly = False
         TxtBxNumeroMuestra.Enabled = False
+        TxtBxNumeroGuia.Select()
         LblCantidadMuestras.Text = "Cantidad de muestras" & vbCrLf & "en esta guia:"
     End Sub
 
@@ -125,7 +152,7 @@ Public Class MainForm
                 conn.Open()
                 Dim cmd As New MySqlCommand(String.Format("INSERT INTO Guias VALUES ('" & llave & "', '" & t_creacion & "', '" & consecutivo & "', '" & TxtBxNumeroGuia.Text & "', '" & TxBxUsuario.Text & "');"), conn)
                 cmd.ExecuteNonQuery()
-                MsgBox("Guia Registrada Satisfactoriamente", False, "Guia Registrada")
+                'MsgBox("Guia Registrada Satisfactoriamente", False, "Guia Registrada")
             Catch ex As MySqlException
                 MsgBox(ex.Message, False, "Error")
                 conn.Close()
@@ -135,6 +162,7 @@ Public Class MainForm
             CargarDGV(llave)
             TxtBxNumeroGuia.Enabled = False
             TxtBxNumeroMuestra.Enabled = True
+            TxtBxNumeroMuestra.Select()
             muestras_ingresadas = 0
         End If
     End Sub
@@ -185,7 +213,7 @@ Public Class MainForm
                 conn.Open()
                 Dim cmd As New MySqlCommand(String.Format("INSERT INTO muestras VALUES ('" & llave & "', '" & TxBxGuiaID.Text & "', '" & TxtBxNumeroMuestra.Text & "', '" & TxBxUsuario.Text & "', '" & t_creacion & "');"), conn)
                 cmd.ExecuteNonQuery()
-                MsgBox("Muestra Registrada Satisfactoriamente", False, "Muestra Registrada")
+                'MsgBox("Muestra Registrada Satisfactoriamente", False, "Muestra Registrada")
                 muestras_ingresadas += 1
                 LblCantidadMuestras.Text = "Cantidad de muestras" & vbCrLf & "en esta guia: " & muestras_ingresadas
             Catch ex As MySqlException
@@ -195,11 +223,16 @@ Public Class MainForm
             End Try
             conn.Close()
             CargarDGV(TxBxGuiaID.Text)
+            TxtBxNumeroMuestra.Text = ""
+            TxtBxNumeroMuestra.Select()
 
         End If
     End Sub
 
+    Dim control As Integer = 0
+
     Private Sub BtnBuscarGuia_Click(sender As Object, e As EventArgs) Handles BtnBuscarGuia.Click
+        control = 1
         TxtBxNumeroGuia.Text = InputBox("Ingrese el número de guía", "Info").ToUpper
         TxtBxNumeroGuia.Enabled = False
         TxtBxNumeroMuestra.Text = ""
@@ -208,7 +241,7 @@ Public Class MainForm
 
         Try
             conn.Open()
-            Dim query As String = "Select guias.FechaIngreso, Consecutivo, NumeroGuia as 'Numero de Guia', usuarios.Nombre 
+            Dim query As String = "Select guias.GuiaID, guias.FechaIngreso as 'Fecha de Ingreso', Consecutivo, NumeroGuia as 'Numero de Guia', usuarios.Nombre as 'Ingresada por'
                                    from guias inner join usuarios on guias.usuarioId = usuarios.usuarioid
                                    where NumeroGuia LIKE '" & TxtBxNumeroGuia.Text & "%';"
             Dim cmd As New MySqlCommand(query, conn)
@@ -228,10 +261,11 @@ Public Class MainForm
             MsgBox(ex.Message)
             conn.Close()
         End Try
-
+        DGVRegistroMuestras.Columns(0).Visible = False
     End Sub
 
     Private Sub BtnBuscarMuestra_Click(sender As Object, e As EventArgs) Handles BtnBuscarMuestra.Click
+        Dim control = 0
         TxtBxNumeroMuestra.Text = InputBox("Ingrese el número de muestra", "Info").ToUpper
         TxtBxNumeroGuia.Text = ""
         TxtBxNumeroMuestra.Enabled = False
@@ -240,7 +274,7 @@ Public Class MainForm
         If TxtBxNumeroMuestra.TextLength < 10 Then
             Try
                 conn.Open()
-                Dim query As String = "Select guias.NumeroGuia, numeromuestra, usuarios.nombre, muestras.FechaIngreso
+                Dim query As String = "Select guias.NumeroGuia as 'Numero de Guia', numeromuestra as 'Numero de Muestra', usuarios.nombre as 'Ingresada por', muestras.FechaIngreso as 'Fecha de Ingreso'
                                        From usuarios inner Join muestras On muestras.UsuarioID = usuarios.UsuarioID inner Join guias On muestras.GuiaID = guias.GuiaID
                                        Where NumeroMuestra Like '" & TxtBxNumeroMuestra.Text & "%';"
                 Dim cmd As New MySqlCommand(query, conn)
@@ -265,7 +299,7 @@ Public Class MainForm
             TxtBxNumeroMuestra.Text = TxtBxNumeroMuestra.Text.Substring(TxtBxNumeroMuestra.Text.Length - 10)
             Try
                 conn.Open()
-                Dim query As String = "Select guias.NumeroGuia, numeromuestra, usuarios.nombre, muestras.FechaIngreso
+                Dim query As String = "Select guias.NumeroGuia as 'Numero de Guia', numeromuestra as 'Numero de Muestra', usuarios.nombre as 'Ingresada por', muestras.FechaIngreso as 'Fecha de Ingreso'
                                        From usuarios inner Join muestras On muestras.UsuarioID = usuarios.UsuarioID inner Join guias On muestras.GuiaID = guias.GuiaID
                                        Where NumeroMuestra Like '" & TxtBxNumeroMuestra.Text & "%';"
                 Dim cmd As New MySqlCommand(query, conn)
@@ -319,4 +353,34 @@ Public Class MainForm
         End Using
         Process.Start(filepath)
     End Sub
+
+    Private Sub BtnDesconectar_Click(sender As Object, e As EventArgs) Handles BtnDesconectar.Click
+        MsgBox("Desconectada!")
+        FormContraseña.TxBxContraseña.Text = ""
+        FormContraseña.TxtBxUsuario.Text = ""
+        FormContraseña.TxtBxUsuario.Select()
+        Me.Hide()
+        FormContraseña.Show()
+    End Sub
+
+    Private Sub MainForm_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        FormContraseña.Close()
+    End Sub
+
+    Private Sub DGVRegistroMuestras_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVRegistroMuestras.CellDoubleClick
+        If control = 0 Then
+            Exit Sub
+        End If
+
+        Cursor = Cursors.WaitCursor
+        Dim fila_actual As Integer = (DGVRegistroMuestras.CurrentRow.Index)
+        Dim GuiaID As String = DGVRegistroMuestras(0, fila_actual).Value.ToString
+        Dim GuiaNo As String = DGVRegistroMuestras(3, fila_actual).Value.ToString
+
+        Form4.RecibirGuiaID(GuiaID, GuiaNo)
+        Form4.ShowDialog()
+
+
+    End Sub
+
 End Class

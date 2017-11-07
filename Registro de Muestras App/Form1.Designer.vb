@@ -22,6 +22,7 @@ Partial Class MainForm
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
@@ -37,6 +38,9 @@ Partial Class MainForm
         Me.DGVRegistroMuestras = New System.Windows.Forms.DataGridView()
         Me.TxBxUsuario = New System.Windows.Forms.TextBox()
         Me.TxBxGuiaID = New System.Windows.Forms.TextBox()
+        Me.BtnDesconectar = New System.Windows.Forms.Button()
+        Me.LabelUsuario = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.DGVRegistroMuestras, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -45,7 +49,7 @@ Partial Class MainForm
         Me.BtnNuevaGuia.Location = New System.Drawing.Point(15, 19)
         Me.BtnNuevaGuia.Name = "BtnNuevaGuia"
         Me.BtnNuevaGuia.Size = New System.Drawing.Size(104, 23)
-        Me.BtnNuevaGuia.TabIndex = 0
+        Me.BtnNuevaGuia.TabIndex = 2
         Me.BtnNuevaGuia.Text = "Nueva Guia"
         Me.BtnNuevaGuia.UseVisualStyleBackColor = True
         '
@@ -54,7 +58,7 @@ Partial Class MainForm
         Me.BtnBuscarGuia.Location = New System.Drawing.Point(125, 19)
         Me.BtnBuscarGuia.Name = "BtnBuscarGuia"
         Me.BtnBuscarGuia.Size = New System.Drawing.Size(104, 23)
-        Me.BtnBuscarGuia.TabIndex = 1
+        Me.BtnBuscarGuia.TabIndex = 3
         Me.BtnBuscarGuia.Text = "Buscar Guia"
         Me.BtnBuscarGuia.UseVisualStyleBackColor = True
         '
@@ -63,7 +67,7 @@ Partial Class MainForm
         Me.BtnBuscarMuestra.Location = New System.Drawing.Point(235, 19)
         Me.BtnBuscarMuestra.Name = "BtnBuscarMuestra"
         Me.BtnBuscarMuestra.Size = New System.Drawing.Size(104, 23)
-        Me.BtnBuscarMuestra.TabIndex = 2
+        Me.BtnBuscarMuestra.TabIndex = 4
         Me.BtnBuscarMuestra.Text = "Buscar Muestra"
         Me.BtnBuscarMuestra.UseVisualStyleBackColor = True
         '
@@ -73,7 +77,7 @@ Partial Class MainForm
         Me.BtnExportar.Location = New System.Drawing.Point(431, 19)
         Me.BtnExportar.Name = "BtnExportar"
         Me.BtnExportar.Size = New System.Drawing.Size(89, 23)
-        Me.BtnExportar.TabIndex = 3
+        Me.BtnExportar.TabIndex = 5
         Me.BtnExportar.Text = "Exportar"
         Me.BtnExportar.UseVisualStyleBackColor = True
         '
@@ -112,7 +116,7 @@ Partial Class MainForm
         Me.TxtBxNumeroMuestra.Location = New System.Drawing.Point(121, 80)
         Me.TxtBxNumeroMuestra.Name = "TxtBxNumeroMuestra"
         Me.TxtBxNumeroMuestra.Size = New System.Drawing.Size(131, 20)
-        Me.TxtBxNumeroMuestra.TabIndex = 7
+        Me.TxtBxNumeroMuestra.TabIndex = 1
         '
         'TxtBxNumeroGuia
         '
@@ -120,7 +124,7 @@ Partial Class MainForm
         Me.TxtBxNumeroGuia.Location = New System.Drawing.Point(121, 55)
         Me.TxtBxNumeroGuia.Name = "TxtBxNumeroGuia"
         Me.TxtBxNumeroGuia.Size = New System.Drawing.Size(131, 20)
-        Me.TxtBxNumeroGuia.TabIndex = 8
+        Me.TxtBxNumeroGuia.TabIndex = 0
         '
         'DGVRegistroMuestras
         '
@@ -172,11 +176,38 @@ Partial Class MainForm
         Me.TxBxGuiaID.TabStop = False
         Me.TxBxGuiaID.Visible = False
         '
+        'BtnDesconectar
+        '
+        Me.BtnDesconectar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnDesconectar.Location = New System.Drawing.Point(431, 48)
+        Me.BtnDesconectar.Name = "BtnDesconectar"
+        Me.BtnDesconectar.Size = New System.Drawing.Size(89, 27)
+        Me.BtnDesconectar.TabIndex = 6
+        Me.BtnDesconectar.Text = "Cerrar Sesion"
+        Me.BtnDesconectar.UseVisualStyleBackColor = True
+        '
+        'LabelUsuario
+        '
+        Me.LabelUsuario.AutoSize = True
+        Me.LabelUsuario.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelUsuario.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.LabelUsuario.Location = New System.Drawing.Point(12, 1)
+        Me.LabelUsuario.Name = "LabelUsuario"
+        Me.LabelUsuario.Size = New System.Drawing.Size(51, 15)
+        Me.LabelUsuario.TabIndex = 15
+        Me.LabelUsuario.Text = "Label1"
+        '
+        'Timer1
+        '
+        Me.Timer1.Interval = 300000
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(557, 605)
+        Me.Controls.Add(Me.LabelUsuario)
+        Me.Controls.Add(Me.BtnDesconectar)
         Me.Controls.Add(Me.TxBxGuiaID)
         Me.Controls.Add(Me.TxBxUsuario)
         Me.Controls.Add(Me.DGVRegistroMuestras)
@@ -212,4 +243,7 @@ Partial Class MainForm
     Friend WithEvents DGVRegistroMuestras As DataGridView
     Friend WithEvents TxBxUsuario As TextBox
     Friend WithEvents TxBxGuiaID As TextBox
+    Friend WithEvents BtnDesconectar As Button
+    Friend WithEvents LabelUsuario As Label
+    Friend WithEvents Timer1 As Timer
 End Class
