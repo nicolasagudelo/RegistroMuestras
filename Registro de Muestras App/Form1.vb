@@ -363,7 +363,7 @@ Public Class MainForm
         FormContraseña.Show()
     End Sub
 
-    Private Sub MainForm_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+    Private Sub MainForm_Closed(sender As Object, e As EventArgs) Handles MyBase.Closed
         FormContraseña.Close()
     End Sub
 
@@ -383,4 +383,9 @@ Public Class MainForm
 
     End Sub
 
+    Private Sub LblCambiarContraseña_Click(sender As Object, e As EventArgs) Handles LblCambiarContraseña.Click
+        Dim usuario As Integer = Convert.ToInt64(TxBxUsuario.Text)
+        Form5.RecibirUsuario(usuario)
+        Form5.ShowDialog()
+    End Sub
 End Class

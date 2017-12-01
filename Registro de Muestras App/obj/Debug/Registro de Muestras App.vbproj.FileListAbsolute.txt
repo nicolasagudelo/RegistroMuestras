@@ -13,5 +13,6 @@ C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\
 C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\obj\Debug\Registro_de_Muestras_App.FormIngresoGuia.resources
 C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\bin\Debug\MySql.Data.dll
 C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\bin\Debug\MySql.Data.xml
-C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\obj\Debug\Registro de Muestras App.vbprojResolveAssemblyReference.cache
 C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\obj\Debug\Registro_de_Muestras_App.Form4.resources
+C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\obj\Debug\Registro de Muestras App.vbprojResolveAssemblyReference.cache
+C:\Users\IDETECO\source\repos\Registro de Muestras App\Registro de Muestras App\obj\Debug\Registro_de_Muestras_App.Form5.resources

@@ -22,6 +22,7 @@ Partial Class Form4
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form4))
         Me.DGVMuestrasGuia = New System.Windows.Forms.DataGridView()
         Me.LblNumeroGuia = New System.Windows.Forms.Label()
         Me.LblCantidadMuestras = New System.Windows.Forms.Label()
@@ -80,8 +81,9 @@ Partial Class Form4
         Me.Controls.Add(Me.LblCantidadMuestras)
         Me.Controls.Add(Me.LblNumeroGuia)
         Me.Controls.Add(Me.DGVMuestrasGuia)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form4"
-        Me.Text = "Form4"
+        Me.Text = "Muestras de la guia"
         CType(Me.DGVMuestrasGuia, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
